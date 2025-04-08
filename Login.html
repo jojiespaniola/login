@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
+    input {
+      margin: 10px;
+      padding: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Login</h2>
+  <input type="text" id="username" placeholder="Username"><br>
+  <input type="password" id="password" placeholder="Password"><br>
+  <button onclick="login()">Login</button>
+
+  <script>
+    const correctUsername = "admin123";
+    const correctPassword = "admin123";
+    let attempts = 0;
+    let locked = false;
+
+    function login() {
+      if (locked) {
+        alert("Please wait 10 seconds before trying again.");
+        return;
+      }
+
+      const user = document.getElementById("username").value;
+      const pass = document.getElementById("password").value;
+
+      if (user === correctUsername && pass === correctPassword) {
+        alert("Login successful!");
+        
+        window.location.href = "Home page.html";
+      } else {
+        attempts++;
+        if (attempts >= 2) {
+          alert("You have made two incorrect attempts. Please try again in 10 seconds.");
+          locked = true;
+          setTimeout(function () {
+            alert("You can try again now.");
+            attempts = 0;
+            locked = false;
+          }, 10000); // 10 seconds
+        } else {
+          alert("Incorrect username or password. Try again.");
+        }
+      }
+    }
+  </script>
+</body>
+</html>
